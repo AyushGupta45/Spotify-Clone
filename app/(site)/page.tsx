@@ -14,7 +14,7 @@ export default async function Home() {
     <div className="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto">
       <Header>
         <div className="mb-2">
-          <h1 className="text-white text-3xl font-bold">Welcome Back</h1>
+        <h1 className="text-white text-3xl font-bold hover:underline transition cursor-pointer">Welcome Back</h1>
           <div
             className="
               grid grid-cols-1
@@ -41,7 +41,7 @@ export default async function Home() {
       <div className="flex gap-10 flex-col mt-4">
         <div className="px-6">
           <div className="flex justify-between items-center">
-            <h1 className="text-white text-3xl font-bold">
+            <h1 className="text-white text-3xl font-bold hover:underline transition cursor-pointer">
               Your Curated Songs
             </h1>
           </div>
@@ -51,7 +51,7 @@ export default async function Home() {
         {/* Features Charts */}
         <div className="px-6">
           <div className="flex justify-between items-center">
-            <h1 className="text-white text-3xl font-bold">Features Charts</h1>
+            <h1 className="text-white text-3xl font-bold hover:underline transition cursor-pointer">Features Charts</h1>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-2">
             {charts.map((chart, index) => (
@@ -69,7 +69,7 @@ export default async function Home() {
         {/* Artists */}
         <div className="px-6 mb-5">
           <div className="flex justify-between items-center">
-            <h1 className="text-white text-3xl font-bold">Artists</h1>
+            <h1 className="text-white text-3xl font-bold hover:underline transition cursor-pointer">Artists</h1>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-2">
             {artists.map((chart, index) => (
