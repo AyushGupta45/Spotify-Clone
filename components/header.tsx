@@ -26,7 +26,7 @@ const Header: React.FC<HeaderProps> = ({
 
   if (customColor) {
     bgColorClass = "bg-[#282828]";
-    mbClass = "mb-0"; 
+    mbClass = "mb-0";
   }
 
   return (
@@ -68,7 +68,11 @@ const Header: React.FC<HeaderProps> = ({
         </div>
         <div className="flex justify-between items-center gap-x-4 mr-3">
           <div className="flex gap-x-4 items-center">
-            <FaSpotify className="cursor-pointer hover:opacity-75 transition" size={32} />
+            <FaSpotify
+              onClick={() => router.push("/")}
+              className="cursor-pointer hover:opacity-75 transition"
+              size={32}
+            />
           </div>
         </div>
       </div>
