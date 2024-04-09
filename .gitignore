@@ -1,37 +1,42 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-password.txt
-
-# dependencies
+# Ignore node_modules directory
 /node_modules
-/.pnp
+/assets
+
+# Ignore .pnp files
+.pnp
 .pnp.js
+
+# Ignore Yarn install state
 .yarn/install-state.gz
 
-# testing
+# Ignore coverage directory
 /coverage
 
-# next.js
+# Ignore Next.js specific directories
 /.next/
 /out/
 
-# production
+# Ignore build directory
 /build
 
-# misc
+# Ignore miscellaneous files
 .DS_Store
 *.pem
 
-# debug
+# Ignore debug logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# local env files
-.env*.local
+# Ignore local environment files
+*.env*
 
-# vercel
+# Ignore Vercel specific files
 .vercel
 
-# typescript
+# Ignore TypeScript build info
 *.tsbuildinfo
+
+# Ignore Next.js environment file
 next-env.d.ts
+
