@@ -52,7 +52,7 @@ const ApiContent: React.FC<ApiContentProps> = ({
     overflow-hidden
   `}
       >
-        <Image className="object-cover" fill src={image} alt="image" />
+        <Image className="object-cover" fill src={image} alt="image" priority={true} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
       </div>
       <div className="flex flex-col w-full pt-4 gap-y-1">
         <p className="font-semibold truncate w-full text-start">{name}</p>

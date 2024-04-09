@@ -5,25 +5,28 @@ import { useEffect, useState } from "react";
 import { BsPauseFill, BsPlayFill } from "react-icons/bs";
 import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
 import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai";
-import { RxShuffle } from "react-icons/rx";
-import { RiRepeat2Fill } from "react-icons/ri";
-
 import { Song } from "@/types";
 import usePlayer from "@/hooks/usePlayer";
 
 import MediaItem from "./mediaitem";
 import Slider from "./slider";
+import Seekbar from "./seekbar";
 
 interface PlayerContentProps {
   song: Song;
   songUrl: string;
+  duration: number;
 }
 
-const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
+const PlayerContent: React.FC<PlayerContentProps> = ({
+  song,
+  songUrl,
+  duration,
+}) => {
   const player = usePlayer();
   const [volume, setVolume] = useState(0.3);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isClicked, setIsClicked] = useState<boolean>(false);
+  const [seekValue, setSeekValue] = useState(0);
 
   const Icon = isPlaying ? BsPauseFill : BsPlayFill;
   const VolumeIcon = volume === 0 ? HiSpeakerXMark : HiSpeakerWave;
@@ -93,6 +96,12 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
     }
   };
 
+  const handleSeekChange = (value: number) => {
+    const newTime = (value / 100) * (duration || 0);
+    setSeekValue(value);
+    sound?.seek(newTime);
+  };
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 h-full">
       <div className="flex w-full justify-start">
@@ -110,46 +119,42 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
         </div>
       </div>
 
-      <div className="hidden h-full md:flex flex-col justify-center items-center w-full max-w-[722px] gap-x-8">
-        <div className="hidden h-full md:flex justify-center items-center w-full max-w-[722px] gap-x-8">
-          <RxShuffle
-            size={20}
-            className="text-neutral-400 cursor-pointer hover:text-white transition"
-            onClick={() => {}}
-          />
+      <div className="flex flex-col">
+        <div className="hidden h-full md:flex flex-col justify-center items-center w-full max-w-[722px] gap-x-8">
+          <div className="hidden h-full md:flex justify-center items-center w-full max-w-[722px] gap-x-10">
+            <AiFillStepBackward
+              size={30}
+              className="text-neutral-400 cursor-pointer hover:text-white transition"
+              onClick={onPlayPrevious}
+            />
 
-          <AiFillStepBackward
-            size={30}
-            className="text-neutral-400 cursor-pointer hover:text-white transition"
-            onClick={onPlayPrevious}
-          />
+            <div
+              onClick={handlePlay}
+              className="flex items-center justify-center h-10 w-10 rounded-full bg-white p-1 cursor-pointer"
+            >
+              <Icon size={40} className="text-black" />
+            </div>
 
-          <div
-            onClick={handlePlay}
-            className="flex items-center justify-center h-10 w-10 rounded-full bg-white p-1 cursor-pointer"
-          >
-            <Icon size={30} className="text-black" />
-          </div>
-
-          <AiFillStepForward
-            onClick={onPlayNext}
-            size={30}
-            className="
+            <AiFillStepForward
+              onClick={onPlayNext}
+              size={30}
+              className="
               text-neutral-400 
               cursor-pointer 
               hover:text-white 
               transition
             "
-          />
-
-          <RiRepeat2Fill
-            size={20}
-            className={`cursor-pointer transition ${isClicked ? 'text-green-500' : 'text-neutral-400'} ${isClicked ? 'hover:text-green-400' : 'hover:text-white'}`}
-            onClick={() => {}}
-          />
-
+            />
+          </div>
         </div>
-
+        <div className="hidden md:flex w-full">
+          <Seekbar
+            value={seekValue}
+            onChange={handleSeekChange}
+            duration={duration}
+            isPlaying={isPlaying}
+          />
+        </div>
       </div>
 
       <div className="hidden md:flex w-full justify-end pr-2">
