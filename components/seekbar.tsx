@@ -36,6 +36,9 @@ const Seekbar: React.FC<SeekbarProps> = ({ value = 0, onChange, duration, isPlay
     setSliderValue([value]);
   }, [value]);
 
+  // Calculate fill percentage based on startTime and duration
+  const fillPercentage = duration ? (startTime / duration) * 100 : 0;
+
   const formatTime = (seconds: number): string => {
     const minutes: number = Math.floor(seconds / 60);
     const remainingSeconds: number = Math.floor(seconds % 60);
@@ -73,7 +76,10 @@ const Seekbar: React.FC<SeekbarProps> = ({ value = 0, onChange, duration, isPlay
         aria-label="Seekbar"
       >
         <RadixSlider.Track className="bg-neutral-600 relative grow rounded-full h-[3px]">
-          <RadixSlider.Range className="absolute bg-white h-full rounded-full" />
+          <RadixSlider.Range
+            className="absolute bg-white h-full rounded-full"
+            style={{ width: `${fillPercentage}%` }}
+          />
         </RadixSlider.Track>
       </RadixSlider.Root>
       <p className="text-neutral-400 text-sm font-medium text-start w-[60px]">
