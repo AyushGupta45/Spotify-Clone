@@ -10,7 +10,7 @@ interface ListItemProps {
   href: string;
 }
 
-const listitem: React.FC<ListItemProps> = ({ image, name, href }) => {
+const ListItem: React.FC<ListItemProps> = ({ image, name, href }) => {
   const router = useRouter();
   const onClick = () => {
     router.push(href);
@@ -63,4 +63,4 @@ const listitem: React.FC<ListItemProps> = ({ image, name, href }) => {
   );
 };
 
-export default listitem;
+export default ListItem;
